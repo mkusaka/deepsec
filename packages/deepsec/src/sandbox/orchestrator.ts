@@ -194,7 +194,7 @@ async function readStderrCapped(cmd: LoggableCommand, maxChars: number): Promise
  *     `deepsec.config.ts`) — it's a one-package npm project; the sandbox
  *     re-installs `deepsec` from npm. Workers run `node_modules/.bin/deepsec`.
  *
- * The deepsec package is identified by `package.json:name === "deepsec"`,
+ * The deepsec package is identified by `package.json:name === "@mkusaka/deepsec"`,
  * NOT by `pnpm-workspace.yaml`, so we don't accidentally pick the user's
  * parent monorepo if they happen to have one above `.deepsec/`.
  */
@@ -205,7 +205,7 @@ function resolveDeepsecAppContext(): { root: string; mode: DeepsecMode } {
     if (fs.existsSync(pkgPath)) {
       try {
         const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf-8"));
-        if (pkg.name === "deepsec") {
+        if (pkg.name === "@mkusaka/deepsec") {
           if (dir.includes(`${path.sep}node_modules${path.sep}`)) {
             // Installed: ship the user's .deepsec/ workspace, not the
             // node_modules/deepsec package itself. The workspace has its

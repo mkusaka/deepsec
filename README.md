@@ -1,5 +1,19 @@
 # deepsec
 
+## mkusaka fork
+
+This fork publishes as `@mkusaka/deepsec` and updates Codex and its SDK to
+0.166.0 and the Claude Agent SDK to 0.3.316. After npm publication, initialize
+with:
+
+```bash
+npx @mkusaka/deepsec init --agent codex --model gpt-6.1-sol --model-auth local
+```
+
+The workspace installs this fork under the `deepsec` dependency alias, so
+existing `deepsec/config` imports and `pnpm deepsec` commands still work.
+The documentation below describes upstream Deepsec.
+
 [`deepsec`](https://deepsec.sh) is an agent-powered vulnerability scanner that you can run in your own infrastructure, optimized to perform on-demand review of all code in existing 
 large-scale repos.
 

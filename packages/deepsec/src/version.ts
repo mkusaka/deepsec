@@ -14,7 +14,7 @@ function getDeepsecPackageRoot(): string {
     if (fs.existsSync(pkgPath)) {
       try {
         const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf-8"));
-        if (pkg.name === "deepsec" && typeof pkg.version === "string") {
+        if (pkg.name === "@mkusaka/deepsec" && typeof pkg.version === "string") {
           cachedPackageRoot = dir;
           return dir;
         }
@@ -25,14 +25,14 @@ function getDeepsecPackageRoot(): string {
     dir = path.dirname(dir);
   }
   throw new Error(
-    "Could not locate the deepsec package.json (no ancestor with name === 'deepsec' found)",
+    "Could not locate the deepsec package.json (no ancestor with name === '@mkusaka/deepsec' found)",
   );
 }
 
 /**
  * Read the version string from the deepsec package's package.json. Walks
  * up from this module's location looking for the nearest package.json
- * whose `name` is `"deepsec"`.
+ * whose `name` is `"@mkusaka/deepsec"`.
  *
  * Works the same way in dev (tsx running source — package.json is at
  * `packages/deepsec/`) and in production (bundled dist — package.json
@@ -66,5 +66,7 @@ export function getDeepsecWorkspaceDependency(): string {
   const isSourceCheckout =
     fs.existsSync(path.join(packageRoot, "src", "cli.ts")) &&
     fs.existsSync(path.join(packageRoot, "build.mjs"));
-  return isSourceCheckout ? pathToFileURL(packageRoot).href : getDeepsecVersion();
+  return isSourceCheckout
+    ? pathToFileURL(packageRoot).href
+    : `npm:@mkusaka/deepsec@${getDeepsecVersion()}`;
 }

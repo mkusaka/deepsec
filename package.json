@@ -11,11 +11,11 @@
   "packageManager": "pnpm@8.15.9",
   "repository": {
     "type": "git",
-    "url": "https://github.com/vercel-labs/deepsec"
+    "url": "https://github.com/mkusaka/deepsec"
   },
   "scripts": {
     "build": "pnpm -r build",
-    "bundle": "pnpm --filter deepsec bundle",
+    "bundle": "pnpm --filter @mkusaka/deepsec bundle",
     "deepsec": "tsx packages/deepsec/src/cli.ts",
     "test": "vitest run",
     "test:unit": "vitest run --project core --project scanner --project processor --project cli",
@@ -47,7 +47,7 @@
     "vitest": "^3.2.7"
   },
   "dependencies": {
-    "deepsec": "workspace:*"
+    "deepsec": "workspace:@mkusaka/deepsec@*"
   },
   "pnpm": {
     "overrides": {
